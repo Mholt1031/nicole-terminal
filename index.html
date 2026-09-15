@@ -160,12 +160,27 @@ const messages = {
   "34": "You are... so fucking sexy...I am going to devour you"
 };
 
+function retrieveMessage() <script>
+
+const messages = {
+  "34": "YOUR CURRENT MESSAGE HERE"
+};
+
 function retrieveMessage() {
 
-  const code = document.getElementById("code").value;
+  const code = document.getElementById("code").value.trim();
   const message = messages[code];
 
+  // Has this code already been opened on this device?
+  if (localStorage.getItem("destroyed_" + code) === "true") {
+    alert("MESSAGE DESTROYED // ACCESS TOKEN INVALIDATED");
+    return;
+  }
+
   if (message) {
+
+    // Mark it as consumed THE MOMENT it is successfully opened
+    localStorage.setItem("destroyed_" + code, "true");
 
     document.getElementById("login").style.display = "none";
     document.getElementById("output").style.display = "block";
@@ -179,17 +194,15 @@ function retrieveMessage() {
 }
 
 function destroyMessage() {
-
-  document.getElementById("message").textContent =
-    "MESSAGE DESTROYED";
+document.getElementById("message").textContent =
+    "PURGING MESSAGE...\n\n██████████ 100%\n\nMESSAGE DESTROYED";
 
   setTimeout(() => {
     location.reload();
-  }, 1200);
+  }, 2000);
 
 }
 
 </script>
-
 </body>
 </html>
