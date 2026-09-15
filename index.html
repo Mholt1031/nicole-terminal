@@ -1,106 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Nicole Terminal</title>
 
 <style>
-  * { box-sizing: border-box; }
 
-  body {
-    margin: 0;
-    min-height: 100vh;
-    background: #050805;
-    color: #72ff72;
-    font-family: "Courier New", monospace;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 24px;
-  }
+* {
+  box-sizing: border-box;
+}
 
-  .terminal {
-    width: 100%;
-    max-width: 520px;
-    border: 1px solid #35b935;
-    padding: 30px 22px;
-    box-shadow: 0 0 30px rgba(60,255,60,.12);
-  }
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: #050805;
+  color: #72ff72;
+  font-family: "Courier New", monospace;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+}
 
-  .header {
-    font-size: 13px;
-    opacity: .65;
-    letter-spacing: 2px;
-    margin-bottom: 35px;
-  }
+.terminal {
+  width: 100%;
+  max-width: 520px;
+  border: 1px solid #35b935;
+  padding: 30px 22px;
+  box-shadow: 0 0 30px rgba(60,255,60,.12);
+}
 
-  h1 {
-    font-size: 27px;
-    letter-spacing: 3px;
-    margin: 0 0 8px;
-  }
+.header {
+  font-size: 13px;
+  opacity: .65;
+  letter-spacing: 2px;
+  margin-bottom: 35px;
+}
 
-  .status {
-    font-size: 12px;
-    opacity: .7;
-    margin-bottom: 40px;
-  }
+h1 {
+  font-size: 27px;
+  letter-spacing: 3px;
+  margin: 0 0 8px;
+}
 
-  label {
-    display: block;
-    font-size: 13px;
-    letter-spacing: 1px;
-    margin-bottom: 10px;
-  }
+.status {
+  font-size: 12px;
+  opacity: .7;
+  margin-bottom: 40px;
+}
 
-  input {
-    width: 100%;
-    background: #020402;
-    color: #72ff72;
-    border: 1px solid #35b935;
-    padding: 16px;
-    font-family: inherit;
-    font-size: 22px;
-    text-align: center;
-    letter-spacing: 8px;
-    outline: none;
-  }
+label {
+  display: block;
+  font-size: 13px;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
 
-  button {
-    width: 100%;
-    margin-top: 15px;
-    padding: 15px;
-    background: #0c260c;
-    color: #72ff72;
-    border: 1px solid #35b935;
-    font-family: inherit;
-    font-size: 14px;
-    letter-spacing: 2px;
-  }
+input {
+  width: 100%;
+  background: #020402;
+  color: #72ff72;
+  border: 1px solid #35b935;
+  padding: 16px;
+  font-family: inherit;
+  font-size: 22px;
+  text-align: center;
+  letter-spacing: 8px;
+  outline: none;
+}
 
-  #output {
-    display: none;
-    margin-top: 35px;
-    border-top: 1px solid #205820;
-    padding-top: 25px;
-    line-height: 1.7;
-  }
+button {
+  width: 100%;
+  margin-top: 15px;
+  padding: 15px;
+  background: #0c260c;
+  color: #72ff72;
+  border: 1px solid #35b935;
+  font-family: inherit;
+  font-size: 14px;
+  letter-spacing: 2px;
+  cursor: pointer;
+}
 
-  #message {
-    color: #d8ffd8;
-    font-size: 18px;
-    white-space: pre-line;
-  }
+button:active {
+  background: #174217;
+}
 
-  .tiny {
-    margin-top: 35px;
-    font-size: 10px;
-    opacity: .4;
-    text-align: center;
-  }
+#output {
+  display: none;
+  margin-top: 35px;
+  border-top: 1px solid #205820;
+  padding-top: 25px;
+  line-height: 1.7;
+}
+
+#message {
+  color: #d8ffd8;
+  font-size: 18px;
+  white-space: pre-wrap;
+}
+
+.tiny {
+  margin-top: 35px;
+  font-size: 10px;
+  opacity: .4;
+  text-align: center;
+}
+
+.destroyed {
+  color: #72ff72;
+  text-align: center;
+  font-size: 16px;
+  letter-spacing: 2px;
+}
+
 </style>
 </head>
+
 
 <body>
 
@@ -116,6 +135,7 @@
     ● SECURE CHANNEL ACTIVE
   </div>
 
+
   <div id="login">
 
     <label>ENTER ACCESS CODE</label>
@@ -128,11 +148,12 @@
       autocomplete="off"
     >
 
-    <button onclick="retrieveMessage()">
+    <button id="retrieveButton">
       RETRIEVE MESSAGE
     </button>
 
   </div>
+
 
   <div id="output">
 
@@ -142,11 +163,12 @@
 
     <div id="message"></div>
 
-    <button onclick="destroyMessage()">
+    <button id="destroyButton">
       DESTROY MESSAGE
     </button>
 
   </div>
+
 
   <div class="tiny">
     AUTHORIZED RECIPIENT ONLY
@@ -154,39 +176,120 @@
 
 </div>
 
+
 <script>
+
+/* ==========================================
+   NICOLE TERMINAL
+   ACCESS CODE: 34
+   ========================================== */
+
+
+/* CHANGE ONLY THIS MESSAGE */
+
 const messages = {
   "34": `I love you`
 };
 
+
+/* ========================================== */
+
+
+const codeInput = document.getElementById("code");
+const login = document.getElementById("login");
+const output = document.getElementById("output");
+const messageBox = document.getElementById("message");
+const retrieveButton = document.getElementById("retrieveButton");
+const destroyButton = document.getElementById("destroyButton");
+
+
 function retrieveMessage() {
-  const code = document.getElementById("code").value.trim();
-  const message = messages[code];
+
+  const code = codeInput.value.trim();
 
   if (localStorage.getItem("destroyed_" + code) === "true") {
+
     alert("MESSAGE DESTROYED // ACCESS TOKEN INVALIDATED");
+
+    codeInput.value = "";
+
     return;
   }
 
-  if (message) {
-    localStorage.setItem("destroyed_" + code, "true");
 
-    document.getElementById("login").style.display = "none";
-    document.getElementById("output").style.display = "block";
-    document.getElementById("message").textContent = message;
-  } else {
+  const message = messages[code];
+
+
+  if (!message) {
+
     alert("ACCESS DENIED // INVALID CODE");
+
+    codeInput.value = "";
+
+    return;
   }
+
+
+  /*
+  The message becomes one-time-use
+  immediately after successful retrieval.
+  */
+
+  localStorage.setItem("destroyed_" + code, "true");
+
+
+  login.style.display = "none";
+
+  output.style.display = "block";
+
+  messageBox.textContent = message;
+
 }
+
 
 function destroyMessage() {
-  document.getElementById("message").textContent =
-    "PURGING MESSAGE...\n\n[##########] 100%\n\nMESSAGE DESTROYED";
 
-  setTimeout(() => {
+  messageBox.className = "destroyed";
+
+  messageBox.textContent =
+    "PURGING MESSAGE...\n\n" +
+    "[##########] 100%\n\n" +
+    "MESSAGE DESTROYED\n\n" +
+    "ACCESS TOKEN INVALIDATED";
+
+
+  destroyButton.style.display = "none";
+
+
+  setTimeout(function() {
+
     location.reload();
-  }, 2000);
+
+  }, 2500);
+
 }
+
+
+/* BUTTON CONTROLS */
+
+retrieveButton.addEventListener("click", retrieveMessage);
+
+destroyButton.addEventListener("click", destroyMessage);
+
+
+/* ALLOW ENTER KEY TO SUBMIT CODE */
+
+codeInput.addEventListener("keydown", function(event) {
+
+  if (event.key === "Enter") {
+
+    retrieveMessage();
+
+  }
+
+});
+
 </script>
+
 </body>
 </html>
