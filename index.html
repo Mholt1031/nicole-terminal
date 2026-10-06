@@ -10,284 +10,357 @@
 <style>
 
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 body {
-  margin: 0;
-  min-height: 100vh;
-  background: #050805;
-  color: #72ff72;
-  font-family: "Courier New", monospace;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 24px;
+    margin: 0;
+    min-height: 100vh;
+    background: #050805;
+    color: #72ff72;
+    font-family: "Courier New", monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 24px;
 }
 
 .terminal {
-  width: 100%;
-  max-width: 520px;
-  border: 1px solid #35b935;
-  padding: 30px 22px;
-  box-shadow: 0 0 30px rgba(60,255,60,.12);
+    width: 100%;
+    max-width: 520px;
+    border: 1px solid #35b935;
+    padding: 30px 22px;
+    box-shadow: 0 0 30px rgba(60,255,60,.12);
 }
 
 .header {
-  font-size: 13px;
-  opacity: .65;
-  letter-spacing: 2px;
-  margin-bottom: 35px;
+    font-size: 13px;
+    opacity: .65;
+    letter-spacing: 2px;
+    margin-bottom: 35px;
 }
 
 h1 {
-  font-size: 27px;
-  letter-spacing: 3px;
-  margin: 0 0 8px;
+    font-size: 27px;
+    letter-spacing: 3px;
+    margin: 0 0 8px;
 }
 
 .status {
-  font-size: 12px;
-  opacity: .7;
-  margin-bottom: 40px;
+    font-size: 12px;
+    opacity: .7;
+    margin-bottom: 40px;
 }
 
 label {
-  display: block;
-  font-size: 13px;
-  letter-spacing: 1px;
-  margin-bottom: 10px;
+    display: block;
+    font-size: 13px;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
 }
 
 input {
-  width: 100%;
-  background: #020402;
-  color: #72ff72;
-  border: 1px solid #35b935;
-  padding: 16px;
-  font-family: inherit;
-  font-size: 22px;
-  text-align: center;
-  letter-spacing: 8px;
-  outline: none;
+    width: 100%;
+    background: #020402;
+    color: #72ff72;
+    border: 1px solid #35b935;
+    padding: 16px;
+    font-family: inherit;
+    font-size: 22px;
+    text-align: center;
+    letter-spacing: 8px;
+    outline: none;
 }
 
 button {
-  width: 100%;
-  margin-top: 15px;
-  padding: 15px;
-  background: #0c260c;
-  color: #72ff72;
-  border: 1px solid #35b935;
-  font-family: inherit;
-  font-size: 14px;
-  letter-spacing: 2px;
-  cursor: pointer;
+    width: 100%;
+    margin-top: 15px;
+    padding: 15px;
+    background: #0c260c;
+    color: #72ff72;
+    border: 1px solid #35b935;
+    font-family: inherit;
+    font-size: 14px;
+    letter-spacing: 2px;
+    cursor: pointer;
 }
 
 button:active {
-  background: #174217;
+    background: #174217;
 }
 
 #output {
-  display: none;
-  margin-top: 35px;
-  border-top: 1px solid #205820;
-  padding-top: 25px;
-  line-height: 1.7;
+    display: none;
+    margin-top: 35px;
+    border-top: 1px solid #205820;
+    padding-top: 25px;
+    line-height: 1.7;
 }
 
 #message {
-  color: #d8ffd8;
-  font-size: 18px;
-  white-space: pre-wrap;
+    color: #d8ffd8;
+    font-size: 18px;
+    white-space: pre-wrap;
 }
 
 .tiny {
-  margin-top: 35px;
-  font-size: 10px;
-  opacity: .4;
-  text-align: center;
+    margin-top: 35px;
+    font-size: 10px;
+    opacity: .4;
+    text-align: center;
 }
 
 .destroyed {
-  color: #72ff72;
-  text-align: center;
-  font-size: 16px;
-  letter-spacing: 2px;
+    color: #72ff72;
+    text-align: center;
+    font-size: 16px;
+    letter-spacing: 2px;
 }
 
 </style>
 </head>
 
-
 <body>
 
 <div class="terminal">
 
-  <div class="header">
-    HOLT SECURE COMMUNICATIONS // PRIVATE CHANNEL
-  </div>
-
-  <h1>NICOLE TERMINAL</h1>
-
-  <div class="status">
-    ● SECURE CHANNEL ACTIVE
-  </div>
-
-
-  <div id="login">
-
-    <label>ENTER ACCESS CODE</label>
-
-    <input
-      id="code"
-      type="password"
-      inputmode="numeric"
-      maxlength="6"
-      autocomplete="off"
-    >
-
-    <button id="retrieveButton">
-      RETRIEVE MESSAGE
-    </button>
-
-  </div>
-
-
-  <div id="output">
-
-    <div class="status">
-      ACCESS GRANTED // MESSAGE RETRIEVED
+    <div class="header">
+        HOLT SECURE COMMUNICATIONS // PRIVATE CHANNEL
     </div>
 
-    <div id="message"></div>
+    <h1>NICOLE TERMINAL</h1>
 
-    <button id="destroyButton">
-      DESTROY MESSAGE
-    </button>
+    <div class="status">
+        ● SECURE CHANNEL ACTIVE
+    </div>
 
-  </div>
+    <div id="login">
 
+        <label>ENTER ACCESS CODE</label>
 
-  <div class="tiny">
-    AUTHORIZED RECIPIENT ONLY
-  </div>
+        <input
+            id="code"
+            type="password"
+            inputmode="numeric"
+            maxlength="6"
+            autocomplete="off"
+        >
+
+        <button id="retrieveButton">
+            RETRIEVE MESSAGE
+        </button>
+
+    </div>
+
+    <div id="output">
+
+        <div class="status">
+            ACCESS GRANTED // MESSAGE RETRIEVED
+        </div>
+
+        <div id="message"></div>
+
+        <button id="destroyButton">
+            DESTROY MESSAGE
+        </button>
+
+    </div>
+
+    <div class="tiny">
+        AUTHORIZED RECIPIENT ONLY
+    </div>
 
 </div>
 
 
 <script>
 
-/* ==========================================
-   NICOLE TERMINAL
-   ACCESS CODE: 102
-   ========================================== */
+/*
+================================================
+NICOLE TERMINAL
+
+ACCESS CODE: 70
+
+WHEN YOU CREATE A NEW MESSAGE:
+
+1. Change MESSAGE_ID
+2. Change the message below
+
+You can keep ACCESS_CODE as 70.
+================================================
+*/
 
 
-/* CHANGE ONLY THIS MESSAGE */
+/* ===== CHANGE THESE FOR EACH NEW MESSAGE ===== */
 
-const messages = {
-  "70": ` I'm going to slide into you slowly and as deep as I can, then I'm going to hold it there, deep, and not move until you beg me to while I devour your neck`
-};
+const ACCESS_CODE = "52";
+
+const MESSAGE_ID = "2026-10-06-002";
+
+const CURRENT_MESSAGE = `
+I'm going to slide into you slowly and completely and just keep it there and run my tongue over your neck, under your chin and into your mouth and kiss you slowly but hard until you are begging need to start thrusting .
+`;
 
 
-/* ========================================== */
+/* ===== YOU DO NOT NEED TO EDIT BELOW HERE ===== */
 
 
-const codeInput = document.getElementById("code");
-const login = document.getElementById("login");
-const output = document.getElementById("output");
-const messageBox = document.getElementById("message");
-const retrieveButton = document.getElementById("retrieveButton");
-const destroyButton = document.getElementById("destroyButton");
+const codeInput =
+    document.getElementById("code");
+
+const login =
+    document.getElementById("login");
+
+const output =
+    document.getElementById("output");
+
+const messageBox =
+    document.getElementById("message");
+
+const retrieveButton =
+    document.getElementById("retrieveButton");
+
+const destroyButton =
+    document.getElementById("destroyButton");
+
+
+function getStorageKey() {
+
+    return "nicole_terminal_destroyed_" + MESSAGE_ID;
+
+}
 
 
 function retrieveMessage() {
 
-  const code = codeInput.value.trim();
-
-  if (localStorage.getItem("destroyed_" + code) === "true") {
-
-    alert("MESSAGE DESTROYED // ACCESS TOKEN INVALIDATED");
-
-    codeInput.value = "";
-
-    return;
-  }
+    const enteredCode =
+        codeInput.value.trim();
 
 
-  const message = messages[code];
+    /* CHECK ACCESS CODE */
+
+    if (enteredCode !== ACCESS_CODE) {
+
+        alert("ACCESS DENIED // INVALID CODE");
+
+        codeInput.value = "";
+
+        return;
+
+    }
 
 
-  if (!message) {
+    /* CHECK WHETHER THIS SPECIFIC MESSAGE
+       HAS ALREADY BEEN DESTROYED */
 
-    alert("ACCESS DENIED // INVALID CODE");
+    if (
+        localStorage.getItem(getStorageKey()) === "true"
+    ) {
 
-    codeInput.value = "";
+        alert(
+            "MESSAGE DESTROYED // ACCESS TOKEN INVALIDATED"
+        );
 
-    return;
-  }
+        codeInput.value = "";
 
+        return;
 
-  /*
-  The message becomes one-time-use
-  immediately after successful retrieval.
-  */
-
-  localStorage.setItem("destroyed_" + code, "true");
+    }
 
 
-  login.style.display = "none";
+    /* DISPLAY MESSAGE */
 
-  output.style.display = "block";
+    login.style.display = "none";
 
-  messageBox.textContent = message;
+    output.style.display = "block";
+
+    messageBox.className = "";
+
+    messageBox.textContent = CURRENT_MESSAGE;
+
+    destroyButton.style.display = "block";
 
 }
 
 
 function destroyMessage() {
 
-  messageBox.className = "destroyed";
+    /*
+    THE MESSAGE IS ONLY INVALIDATED HERE.
 
-  messageBox.textContent =
-    "PURGING MESSAGE...\n\n" +
-    "[##########] 100%\n\n" +
-    "MESSAGE DESTROYED\n\n" +
-    "ACCESS TOKEN INVALIDATED";
+    Simply retrieving/reading it does NOT
+    destroy the message.
+    */
+
+    localStorage.setItem(
+        getStorageKey(),
+        "true"
+    );
 
 
-  destroyButton.style.display = "none";
+    messageBox.className = "destroyed";
+
+    messageBox.textContent =
+        "PURGING MESSAGE...\n\n" +
+        "[##########] 100%\n\n" +
+        "MESSAGE DESTROYED\n\n" +
+        "ACCESS TOKEN INVALIDATED";
 
 
-  setTimeout(function() {
+    destroyButton.style.display = "none";
 
-    location.reload();
 
-  }, 2500);
+    /*
+    RETURN TO LOGIN SCREEN AFTER
+    THE DESTRUCTION SEQUENCE
+    */
+
+    setTimeout(function() {
+
+        output.style.display = "none";
+
+        login.style.display = "block";
+
+        messageBox.textContent = "";
+
+        messageBox.className = "";
+
+        codeInput.value = "";
+
+        codeInput.focus();
+
+    }, 2500);
 
 }
 
 
 /* BUTTON CONTROLS */
 
-retrieveButton.addEventListener("click", retrieveMessage);
+retrieveButton.addEventListener(
+    "click",
+    retrieveMessage
+);
 
-destroyButton.addEventListener("click", destroyMessage);
+destroyButton.addEventListener(
+    "click",
+    destroyMessage
+);
 
 
 /* ALLOW ENTER KEY TO SUBMIT CODE */
 
-codeInput.addEventListener("keydown", function(event) {
+codeInput.addEventListener(
+    "keydown",
+    function(event) {
 
-  if (event.key === "Enter") {
+        if (event.key === "Enter") {
 
-    retrieveMessage();
+            retrieveMessage();
 
-  }
+        }
 
-});
+    }
+);
 
 </script>
 
